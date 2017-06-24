@@ -114,23 +114,23 @@
         return {
           sourceLayout: {
             value: undefined,
-            type: Object
+            type: Object,
           },
           sourceType: {
-            value: "html",
-            type: String
+            value: 'html',
+            type: String,
           },
           header: {
-            value: "",
-            type: String
+            value: '',
+            type: String,
           },
           htmlSource: {
-            value: "No HTML source",
-            type: String
+            value: 'No HTML source',
+            type: String,
           },
           javaSource: {
-            value: "No Java source",
-            type: String
+            value: 'No Java source',
+            type: String,
           }
         }
       }
@@ -152,38 +152,38 @@
           this.$.layout.removeChild(this.sourceLayout);
           this.sourceLayout = undefined;
         }
-        this.$.closebutton.style.display = "none";
+        this.$.closebutton.style.display = 'none';
         this.classList.add('hiddensplitter');
         this.updateStyles();
         this._clearButtonsActive();
       }
 
       _createSourceElement() {
-        this.sourceLayout = document.createElement("demo-snippet");
-        this.sourceLayout.style.height = "100%";
+        this.sourceLayout = document.createElement('demo-snippet');
+        this.sourceLayout.style.height = '100%';
       }
 
       _clearButtonsActive() {
-        this.$.htmlbutton.removeAttribute("active");
-        this.$.javabutton.removeAttribute("active");
+        this.$.htmlbutton.removeAttribute('active');
+        this.$.javabutton.removeAttribute('active');
       }
 
       showSource(e) {
-        this.classList.remove("hiddensplitter");
+        this.classList.remove('hiddensplitter');
         this.updateStyles();
         this._clearButtonsActive();
-        this.$.closebutton.style.display = "";
+        this.$.closebutton.style.display = '';
         if (this.sourceLayout) {
           this.$.layout.removeChild(this.sourceLayout);
         }
         this._createSourceElement()
-        const sourceType = e.target.getAttribute("source-type");
-        if (sourceType === "html") {
-          this.sourceLayout.setAttribute("source", this.htmlSource);
+        const sourceType = e.target.getAttribute('source-type');
+        if (sourceType === 'html') {
+          this.sourceLayout.setAttribute('source', this.htmlSource);
         } else {
-          this.sourceLayout.setAttribute("source", this.javaSource);
+          this.sourceLayout.setAttribute('source', this.javaSource);
         }
-        var exampleArea = this.$.layout.querySelector("demo-area");
+        var exampleArea = this.$.layout.querySelector('demo-area');
         this.$.layout.insertBefore(this.sourceLayout, exampleArea);
         this.$.layout.updateStyles();
       }

@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
+  <head>		
     <script>
-      if (window.location.pathname.indexOf("es5") == -1) {
-        if (window.navigator.userAgent.indexOf("Trident/") != -1) {
-          window.location = "/vaadin-board-es5/";
+      if (window.location.pathname.indexOf('es5') == -1) {
+        if (window.navigator.userAgent.indexOf('Trident/') != -1) {
+          window.location = '/vaadin-board-es5/';
         }
       } else {
-        if (window.navigator.userAgent.indexOf("Trident/") == -1) {
-          window.location = "/vaadin-board/";
+        if (window.navigator.userAgent.indexOf('Trident/') == -1) {
+          window.location = '/vaadin-board/';
         }
       }
     </script>
@@ -52,7 +52,7 @@
     <script src="./src/customer-chat.js" defer></script>
 
     <!-- Load your application shell -->
-    <link rel="import" href="./src/board-demo-app.html">
+    <link rel="import" href="./src/my-app.html">
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
@@ -70,6 +70,6 @@
     </style>
   </head>
   <body>
-    <board-demo-app id="main"></board-demo-app>
+    <my-app id="main"></my-app>
   </body>
 </html>

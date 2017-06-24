@@ -1,11 +1,17 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/board-demo-app.html",
-  "fragments": [
+  "shell": "src/my-app.html",
+  "xfragments": [
     "src/sales-dashboard/sales-dashboard.html",
     "src/image-collage/image-collage.html",
     "src/row-types/row-types.html",
     "src/404/404.html"
+  ],
+  "fragments": [
+    "src/app-views/view-dashboard/view-dashboard.html",
+    "src/app-views/view-inbox/view-inbox.html",
+    "src/app-views/view-outbox/view-outbox.html",
+    "src/app-views/view-404/view-404.html"
   ],
   "sources": [
     "src/**/*",

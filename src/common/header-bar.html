@@ -48,9 +48,15 @@
       }
     </style>
     <paper-icon-button id="menu" icon="vaadin:menu" on-click="openMenu"></paper-icon-button>
+		<!---- >
+    <img id="logo" src="./images/board-icon-darkbg.svg">
+		<!---->
     <img id="logo" src="./images/board-icon-darkbg.svg">
     <div id="names">
+			<!---- >
       <div id="board-name">Vaadin board</div>
+			<!---->
+      <div id="board-name">Swap</div>
       <div id="separator">&gt;</div>
       <div id="demo-name">[[demoName]]</div>
     </div>
@@ -71,7 +77,8 @@
         }
       }
 
-      _computeName(demo) {
+			/** /
+      _xcomputeName(demo) {
         if(demo === "sales-dashboard"){
           return "Sales Dashboard";
         } else if (demo === "image-collage"){
@@ -81,6 +88,17 @@
         }
         return "";
       }
+			/**/
+
+			// Edit
+      _computeName(demo) {
+				// 'view-dashboard' => 'Dashboard'
+				var popped = demo.split('-').pop();
+				var out = [popped.charAt(0).toUpperCase(), popped.slice(1).toLowerCase()].join('');
+				//console.log('out', out);
+        return out;
+      }
+			// endEdit
 
       openMenu() {
         this.dispatchEvent(new CustomEvent('open-menu'));

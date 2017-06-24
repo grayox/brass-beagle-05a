@@ -1,0 +1,563 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="common/header-bar.html">
+
+<dom-module id="my-app">
+  <template>
+    <style is="custom-style">
+			:host {
+				/** /
+				@font-face {
+          font-family: Roboto;
+					src: url('/fonts/roboto.html', 'sans-serif');
+          font-weight: normal;
+          font-style: normal;
+        }
+				--primary-font-family: Roboto;
+        
+				/** /
+				@font-face {
+				  font-family: 'Open Sans', 'sans-serif';
+					src: url(/fonts/open-sans.html);
+          font-weight: normal;
+          font-style: normal;
+				}
+				--primary-font-family: 'Open Sans';
+				
+				/** /
+				@font-face {
+          font-family: 'Source Sans Pro', 'sans-serif';
+					src: url(/fonts/source-sans-pro.html);
+        }
+				--primary-font-family: 'Source Sans Pro';
+				/**/
+        
+				/* Valo Theme (Vaadin, sans) */
+        --water: #1879DB; /* #187CDD #1778DC */
+        --water-light: #1B87E3;
+        --water-dark: #166ED5;
+				--charcoal: #4B4B4B;
+				--charcoal-light: #585858;
+				--charcoal-dark: #434343;
+				--smoke: #FAFAFA;
+								
+				/* Theme-A (dark, Vaadin, serif) * /
+        --water: #00B4F0;
+				--charcoal: #33383A;
+				--charcoal-light: #404549;
+				--charcoal-dark: #0F171B;
+				--smoke: #E5E8E8;
+				
+				/* Theme-B (light, iOS, sans) * /
+        --water: #0079FF;
+				--charcoal: #414B56;
+				--charcoal-light: #59646F;
+				--charcoal-dark: #242B32;
+				--smoke: #E5E8E8;
+				
+				/** /
+        --water: #00B4F0; --charcoal: #33383A; --charcoal-light: #404549; // Vaadin Theme-A (Vaadin, serif)
+				--water: #0079FF; --charcoal: #414B56; --charcoal-light: #59646F;// Vaadin Theme-B (iOS, sans)
+				libht-blue-500: #03A9F4;
+				libht-blue-A400: #00B0FF;
+				blue-500: #2196F3;
+			  --light-primary-color: #F2FAF9;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #ff3a39;
+        --light-accent-color: #F2FAF9;
+				/**/
+        --app-primary-color: var(--water);
+        --app-primary-color-light: var(--water-light);
+        --app-primary-color-dark: var(--water-dark);
+        --app-background-color: var(--smoke);
+
+				/** /
+				font-family: "Trebuchet MS", Helvetica, Tahoma, Geneva, 'Open Sans', Verdana, Roboto, Arial, sans-serif;
+				font-family: 'Open Sans';
+				font-family: 'Roboto';
+				/**/
+				font-family: var(--primary-font-family);
+				font-weight: 300;
+				font-size: 14px; /*16px*/
+				line-height: 1.55; /*1.15*/
+        
+				display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+				
+      }
+
+      #logoandname {
+        display:none;
+        margin-bottom:20px;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        /*Edit* /
+				-moz-transition:    .6s ease-in-out;
+				-webkit-transition: .6s ease-in-out;
+				-o-transition:      .6s ease-in-out;
+				transition:         .6s ease-in-out;
+				/**/
+				color: white;
+				opacity: 0.5;
+				/*endEdit*/
+      }
+			
+			/* Edit */
+      .drawer-list a:hover {
+        opacity: 1;
+      }
+			
+			.gradient {
+        background:                         var(--app-primary-color); /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(var(--app-primary-color-light), var(--app-primary-color-dark)); /* For Safari 5.1 to 6.0 */
+        background:    -moz-linear-gradient(var(--app-primary-color-light), var(--app-primary-color-dark)); /* For Firefox 3.6 to 15 */
+        background:      -o-linear-gradient(var(--app-primary-color-light), var(--app-primary-color-dark)); /* For Opera 11.1 to 12.0 */
+        background:         linear-gradient(var(--app-primary-color-light), var(--app-primary-color-dark)); /* Standard syntax */
+			}
+			/* endEdit */
+			
+      .drawer-list a.iron-selected {
+				/** /
+				font-weight: bold;
+				/**/
+        background: var(--charcoal-dark);
+				/** /
+        background: var(--app-primary-color);
+				/**/
+				/*Edit*/
+				--iron-icon: {
+					--iron-icon-fill-color: var(--app-primary-color);
+				};
+				opacity: 1;
+				color: white;
+				/** /
+				-moz-transition:    .6s ease-in-out;
+				-webkit-transition: .6s ease-in-out;
+				-o-transition:      .6s ease-in-out;
+				transition:         .6s ease-in-out;
+				/*endEdit*/
+      }
+
+      .menu-item-description {
+        display:block;
+        color: #808080;
+        line-height: 20px;
+        font-size: 12px;
+      }
+
+      #iron-pages {
+        height: 100%;
+      }
+
+      #sideMenu {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        position:absolute;
+        overflow-x: hidden;
+
+        z-index: 2;
+        border-right: 1px solid white;
+        background-color: var(--charcoal);
+        flex-shrink: 0;
+        color: white;
+        -webkit-transition: -webkit-transform 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+        visibility: hidden;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: column;
+				/** /
+        justify-content: space-between;
+				/**/
+      }
+
+      #sideMenu.open {
+        transform: translateX(0);
+        visibility: visible;
+      }
+
+      #logo {
+        display: block;
+        width: 70px;
+        height: 70px;
+        margin: 24px auto;
+				/* Edit */
+				border-radius: 50%;
+				/* endEdit */
+		  }
+
+      #productname {
+				opacity: 0.6;
+        color: white;
+				font-size: 16px;
+        text-align: center;
+        /** /
+				font-weight: 400;
+        font: 400 16px 'Open Sans', Verdana, sans-serif;
+				text-transform: uppercase;
+        letter-spacing: 2px;
+        /**/
+      }
+			
+			/* Edit */
+			#logoandname:hover {
+				cursor: pointer;
+			}
+			#logoandname:hover #productname {
+				color: var(--app-primary-color);
+				opacity: 1.0;
+			}
+			.drop-arrow {
+				opacity: 0.4;
+				--iron-icon-height: 18px;
+				--iron-icon-width: 18px;
+			}
+			/* endEdit */
+
+      #closeMenu {
+        padding: 16px;
+        width: 50px;
+        height: 50px;
+      }
+
+      #content {
+        height: 100%;
+        width: 100%;
+        flex-grow:1;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: padding 0.3s ease-in-out;
+        padding-top:50px;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      #curtain {
+        position:absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        width: 0;
+        transition: opacity 0.5s ease-in-out;
+        background-color: black;
+        opacity:0;
+        z-index:1;
+      }
+
+      #curtain.open {
+        opacity: 0.5;
+        width: 100%;
+      }
+
+      #header {
+        transition: all 0.3s ease-in-out;
+      }
+
+      #externalresource {
+        font-family: 'Open Sans', sans-serif;
+        margin-top: 20px;
+      }
+
+      #resourcelinks {
+        list-style: none;
+        display: flex;
+        margin: 14px 0;
+        padding: 0;
+        justify-content: center;
+      }
+
+      #resourcelinks a {
+        text-transform: uppercase;
+        color: #0B98C7;
+        padding: 0 5px;
+        text-decoration: none;
+        font-size: 12px;
+      }
+
+			/* Edit */
+      #brand-menu {
+				/** /
+        background: var(--charcoal-light);
+        text-transform: uppercase;
+        background: var(--app-primary-color);
+				/**/
+				color: white;
+				
+        width: 100%;
+        padding: 8px 0; /*15px 0;*/
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+				
+        font-size: larger; /*12px;*/
+        text-decoration: none;
+        color: white;
+				font-weight: 500;
+				opacity: 1;
+        display: flex;
+        align-items: center;
+      }
+			
+      #brand-logo {
+				/** /
+        fill: #8b8e91;
+				/**/
+        --iron-icon-width: 24px;
+        --iron-icon-height: 24px;
+        padding-right: 10px;
+      }
+			/* endEdit */
+
+      #githubsource {
+        background: var(--charcoal-light);
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #githubsource a {
+        color: #e5e8e8;
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+      }
+
+      #githublogo {
+        fill: #8b8e91;
+        --iron-icon-width: 24px;
+        --iron-icon-height: 24px;
+        padding-right: 10px;
+      }
+
+      .resourcelinks__item + *:before {
+        content: '•';
+        color: #FFFFFF;
+        vertical-align: middle;
+      }
+
+      @media screen and (max-width: 799px) {
+        #sideMenu {
+          transform: translateX(-100%);
+        }
+
+        #header {
+          transform: translateY(0);
+        }
+      }
+
+      @media screen and (min-width: 800px) {
+        #sideMenu {
+          transform: translateX(-300px);
+          width:300px;
+        }
+      }
+
+      @media screen and (min-width: 1100px) {
+        /* differentiate tablet and desktop */
+
+        #content {
+          padding-left:300px;
+          padding-top:0;
+        }
+        #sideMenu {
+          transform: translateX(0);
+          visibility: visible;
+        }
+
+        #curtain.open {
+          display:none;
+        }
+
+        #header {
+          transform: translateY(-100%);
+        }
+
+        #closeMenu {
+          display: none;
+        }
+
+        #logoandname {
+          display:block;
+        }
+      }
+    </style>
+		
+
+    <app-location route="{{route}}"  use-hash-as-path></app-location>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+		<div id="curtain" on-click="_closeMenu"></div>
+		<div id="sideMenu" on-transitionend="_sideMenuTransitionend">
+			<div id="menucontent">
+				<div id="brand-menu" class="gradient">
+					<iron-icon id="githublogo" icon="vaadin:coins"></iron-icon>
+					<span>Swap</span>
+				</div>
+				<div id="logoandname">
+					<!---- >
+					<img id="logo" src="./images/board-icon-darkbg.svg">
+					<div id="productname">Vaadin Board</div>
+					<!---->
+					<img id="logo" src="//uinames.com/api/photos/female/12.jpg">
+					<div id="productname">
+						Donna Morgan
+						<iron-icon icon="vaadin:angle-down" class="drop-arrow"></iron-icon>
+					</div>
+				</div>
+				<paper-icon-button id="closeMenu" icon="vaadin:close" on-click="_closeMenu"></paper-icon-button>
+				<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+					<a name="view-dashboard" href="#/view-dashboard" xname="row-types" xhref="#/row-types">
+						<paper-icon-button icon="vaadin:dashboard"></paper-icon-button>
+						Dashboard
+					</a>
+					<a name="view-inbox" href="#/view-inbox" xname="image-collage" xhref="#/image-collage">
+						<paper-icon-button icon="vaadin:inbox"></paper-icon-button><!--vaadin:download-->
+						Inbox
+					</a>
+					<a name="view-outbox" href="#/view-outbox" xname="sales-dashboard" xhref="#/sales-dashboard">
+						<paper-icon-button icon="vaadin:outbox"></paper-icon-button><!--vaadin:upload-->
+						Outbox
+					</a>
+				</iron-selector>
+			</div>
+			<!---- >
+			<div id="externalresource">
+				<ul id="resourcelinks">
+					<li class="resourcelinks__item"><a href="https://vaadin.com/elements/-/element/vaadin-board#features">Home Page</a></li>
+					<li class="resourcelinks__item" style="display: none"><a href="#">Javadoc</a></li>
+					<li class="resourcelinks__item"><a href="https://vaadin.com/docs/-/part/board/board-overview.html">Manual</a></li>
+				</ul>
+				<div id="githubsource">
+					<a href="https://github.com/vaadin/vaadin-board-demo">
+						<iron-icon id="githublogo" icon="my-logos:github"></iron-icon>
+						<span>Source code on Github</span>
+					</a>
+				</div>
+			</div>
+			<!---->
+		</div>
+
+		<header-bar id="header"
+								demo=[[page]]
+								on-open-menu="_openMenu"
+								>
+		</header-bar>
+		  
+		<!-- Main content -->
+		<div id="content">
+			<iron-pages id="iron-pages"
+									selected="[[page]]"
+									attr-for-selected="name"
+									fallback-selection="view-404"
+									role="main"
+									>
+				<!---- >
+				<row-types-demo name="row-types"></row-types-demo>
+				<image-collage name="image-collage"></image-collage>
+				<sales-dashboard-demo name="sales-dashboard"></sales-dashboard-demo>
+				<!---->
+				<view-dashboard name="view-dashboard"></view-dashboard>
+				<view-inbox     name="view-inbox"    ></view-inbox>
+				<view-outbox    name="view-outbox"   ></view-outbox>
+				<view-404       name="view-404"      ></view-404>
+			</iron-pages>
+		</div>
+  </template>
+
+  <script>
+    class MyApp extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element) {
+      static get is() { return 'my-app'; }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+	          //value: 'sales-dashboard'
+	          value: 'view-dashboard',
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
+
+      _sideMenuTransitionend(el) {
+          //0.3s is set for #sideMenu transition
+          this.debounce('_notifyResize', this.notifyResize, 300);
+      }
+
+      _routePageChanged(page) {
+        // Polymer 2.0 will call with `undefined` on initialization.
+        // Ignore until we are properly called with a string.
+        if (page === undefined) {
+          return;
+        }
+
+        // If no page was found in the route data, page will be an empty string.
+        // Deault to 'view1' in that case.
+        //this.page = page || 'row-types';
+				// Edit
+        this.page = page || 'view-dashboard';
+				// endEdit
+      }
+
+      _pageChanged(page) {
+        // Load page import on demand. Show 404 page if fails
+				//console.log('page', page);
+        var resolvedPageUrl = this.resolveUrl(['app-views/',  page, '/', page, '.html'].join(''));
+        Polymer.importHref(resolvedPageUrl, null,
+          this._showPage404.bind(this), true);
+        this._closeMenu();
+      }
+
+      _showPage404() {
+        this.page = 'view-404';
+      }
+
+      _openMenu() {
+        this.$.curtain.classList.add('open');
+        this.$.sideMenu.classList.add('open');
+      }
+
+      _closeMenu() {
+        this.$.curtain.classList.remove('open');
+        this.$.sideMenu.classList.remove('open');
+      }
+    }
+
+    window.customElements.define(MyApp.is, MyApp);
+  </script>
+</dom-module>

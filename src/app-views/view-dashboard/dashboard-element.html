@@ -1,5 +1,5 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<dom-module id="demo-element">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<dom-module id="dashboard-element">
   <template>
     <style>
       :host {
@@ -7,7 +7,6 @@
         margin-left: 0;
         margin-right: 0;
         font: 400 13px "Open Sans", Verdana, sans-serif;
-
         text-align: center;
       }
       /*This extra div is needed because of IE11 bug
@@ -16,21 +15,34 @@
       .border {
         background-color: #D3DCE0;
         border: 3px solid white;
+				/* Edit */
+				cursor: pointer;
+      	/* endEdit */
       }
+			/* Edit */
+      .border:hover {
+        background-color: #C3CFD5;
+			}
+			/* endEdit */
       .number {
         background-color: white;
         color: #9BA7A7;
-        font-size: 16px;
+        font-size: 32px;
         border-radius: 50%;
-        width:32px;
-        height:32px;
-        line-height: 32px;
+        width: 96px;
+        height: 96px;
+        line-height: 96px;
         margin: 16px auto 8px;
       }
 
       .size {
         margin-bottom: 16px;
         font-size: 12px;
+				/* Edit */
+				opacity: 0.5;
+				font-weight: 200;
+				text-transform: uppercase;
+				/* endEdit */
       }
     </style>
     <div class="border">
@@ -40,23 +52,23 @@
   </template>
 
   <script>
-    class DemoElement extends Polymer.Element {
+    class DashboardElement extends Polymer.Element {
       static get is() {
-        return 'demo-element';
+        return 'dashboard-element';
       }
 
       static get properties() {
         return {
           itemNumber: {
-            type: String
+            type: String,
           },
           itemSize: {
-            type: String
+            type: String,
           }
         }
       }
 
     }
-    customElements.define(DemoElement.is, DemoElement);
+    customElements.define(DashboardElement.is, DashboardElement);
   </script>
 </dom-module>

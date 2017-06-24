@@ -8,16 +8,15 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../shared-styles.html">
 
-<dom-module id="my-view404">
+<dom-module id="view-404">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
-
-        padding: 10px 20px;
+				padding: 10px 20px;
       }
     </style>
 
@@ -26,15 +25,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Such as: href=="http://polymerelements.github.io/polymer-starter-kit"
     -->
     <div class="card">
-          Oops you hit a 404. <a href="/">Head back to home.</a>
-    </div>
+      Oops you hit a 404. <a href="/" on-tap="_refresh">Head back to home.</a>
+	  </div>
   </template>
 
   <script>
-    class MyView404 extends Polymer.Element {
-      static get is() { return 'my-view404'; }
-    }
 
-    window.customElements.define(MyView404.is, MyView404);
+		class View404 extends Polymer.GestureEventListeners(Polymer.Element){
+			
+      static get is() { return 'view-404'; }
+			
+			constructor() {
+				super(); //console.log('created');
+			}
+
+			_refresh() {
+				console.log('404');
+				location.reload();
+			}
+			
+    }
+		
+    window.customElements.define(View404.is, View404);
   </script>
 </dom-module>
