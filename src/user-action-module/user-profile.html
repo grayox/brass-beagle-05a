@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+<dom-module id="user-profile">
+  <template>
+		<style></style>
+		USER Profile
+  </template>
+
+  <script>
+    class UserProfile extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element) {
+      static get is() { return 'user-profile'; }
+
+      static get properties() {
+        /** /
+        return {
+					selected: {
+						type: Number,
+						value: 0,
+						//observer: '_selectedChanged',
+					}
+        };
+				/**/
+      }
+			
+			constructor() {
+				super();
+			}
+			
+    }
+
+    window.customElements.define(UserProfile.is, UserProfile);
+  </script>
+</dom-module>

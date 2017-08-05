@@ -7,12 +7,6 @@
     "src/row-types/row-types.html",
     "src/404/404.html"
   ],
-  "fragments": [
-    "src/app-views/view-dashboard/view-dashboard.html",
-    "src/app-views/view-inbox/view-inbox.html",
-    "src/app-views/view-outbox/view-outbox.html",
-    "src/app-views/view-404/view-404.html"
-  ],
   "sources": [
     "src/**/*",
     "images/**/*",
